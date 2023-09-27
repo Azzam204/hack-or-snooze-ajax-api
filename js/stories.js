@@ -67,3 +67,15 @@ async function addNewStory(e) {
 }
 
 $storyForm.on("submit",addNewStory);
+
+async function addFavorite ( username, storyid) {
+  console.debug("addFavorite");
+
+  const response = await axios({
+    url: `${BASE_URL}/users/${username}/favorites/${storyid}`,
+    method: "POST",
+    data : {
+      'token' : currentUser.loginToken
+    }
+  })
+}
