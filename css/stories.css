@@ -8,6 +8,8 @@
   color: gray;
   font-size: 0.8rem;
   margin: 10px 0;
+  padding: 10px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
 }
 
 #stories-loading-msg {
@@ -22,7 +24,7 @@
 .story-link {
   color: black;
   font-size: 0.85rem;
-  font-weight: normal;
+  font-weight: 700;
   margin: 18px 0;
 }
 
@@ -31,9 +33,23 @@
 }
 
 .story-author {
-  margin-left: 2em;
+  /* margin-left: 2em; */
 }
 
 .story-user {
   display: block;
+}
+
+.stories-list  .story-author {
+  color: #3e9922;
+  font-weight: 600;
+  display: block;
+  margin-left: 23px;
+}
+
+.stories-list  .story-user {
+  color: #f1b528;
+  display: block;
+  margin-left: 23px;
+
 }

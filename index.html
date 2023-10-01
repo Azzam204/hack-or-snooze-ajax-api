@@ -37,8 +37,13 @@
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
   </div>
-  <div>
-    <a class="nav-link" href="#" id="submit-link"> | submit</a>
+  <div class="nav-left hidden" id="nav-left">
+     | 
+    <a class="nav-link" href="#" id="submit-link">submit</a>
+     | 
+    <a class="nav-link" href="#" id="favorites-link">favorites</a>
+     | 
+    <a class="nav-link" href="#" id="my-stories-link">my stories</a>
   </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
@@ -46,6 +51,18 @@
     <a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
   </div>
 </nav>
+
+<section class="story-form-container container">
+  <form action="#" id="story-form" class="hidden">
+      <h1 id="story-input">Tell us a story</h1>
+      <input type="text" id="story-title" placeholder="Title">
+      <input type="text" id="story-author" placeholder="Author">
+      <input type="text" id="story-url" placeholder="Story URL">
+      <button id="story-submit">Submit</button>
+      <hr>
+  </form>
+  
+</section>
 
 <!-- area for stories (all stories, user stories, favorites) -->
 <section class="stories-container container">
@@ -55,6 +72,9 @@
 
   <!-- List of all stories -->
   <ol id="all-stories-list" class="stories-list"></ol>
+  <ol id="favorite-stories-list" class="stories-list hidden"></ol>
+  <ol id="my-stories-list" class="stories-list hidden"></ol>
+
 
 </section>
 
@@ -99,16 +119,7 @@
   </form>
 </section>
 
-<section class="story-form-container container">
-  <form action="#" id="story-form" class="hidden">
-      <h1 id="story-input">Tell us a story</h1>
-      <input type="text" id="story-title" placeholder="Title">
-      <input type="text" id="story-author" placeholder="Author">
-      <input type="text" id="story-url" placeholder="Story here">
-      <button id="story-submit">Submit</button>
-  </form>
-  
-</section>
+
 
 <!-- Library JS & our JS -->
 <script src="https://unpkg.com/jquery"></script>

@@ -23,16 +23,44 @@ function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
   const hostName = story.getHostName();
+  if(currentUser) {
+    for (let fave of currentUser.favorites) {
+      if(story.storyId === fave.storyId) {
+        return $(`
+        <li id="${story.storyId}">
+          <span class="clicked"></span>
+          <a href="${story.url}" target="a_blank" class="story-link">
+            ${story.title}
+          </a>
+          <small class="story-hostname">(${hostName})</small>
+          <small class="story-author">by ${story.author}</small>
+          <small class="story-user">posted by ${story.username}</small>
+        </li>
+      `);
+      }
+    }
+    return $(`
+        <li id="${story.storyId}">
+          <span class="star"></span>
+          <a href="${story.url}" target="a_blank" class="story-link">
+            ${story.title}
+          </a>
+          <small class="story-hostname">(${hostName})</small>
+          <small class="story-author">by ${story.author}</small>
+          <small class="story-user">posted by ${story.username}</small>
+        </li>
+      `);
+  }
   return $(`
-      <li id="${story.storyId}">
-        <a href="${story.url}" target="a_blank" class="story-link">
-          ${story.title}
-        </a>
-        <small class="story-hostname">(${hostName})</small>
-        <small class="story-author">by ${story.author}</small>
-        <small class="story-user">posted by ${story.username}</small>
-      </li>
-    `);
+  <li id="${story.storyId}">
+    <a href="${story.url}" target="a_blank" class="story-link">
+      ${story.title}
+    </a>
+    <small class="story-hostname">(${hostName})</small>
+    <small class="story-author">by ${story.author}</small>
+    <small class="story-user">posted by ${story.username}</small>
+  </li>
+`);
 }
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
@@ -64,6 +92,7 @@ async function addNewStory(e) {
   
   $storyForm.hide();
   $storyForm.trigger("reset");
+  checkForRememberedUser();
 }
 
 $storyForm.on("submit",addNewStory);
@@ -79,3 +108,83 @@ async function addFavorite ( username, storyid) {
     }
   })
 }
+
+async function deleteFavorite ( username, storyid) {
+  console.debug("deleteFavorite");
+
+  const response = await axios({
+    url: `${BASE_URL}/users/${username}/favorites/${storyid}`,
+    method: "DELETE",
+    data : {
+      'token' : currentUser.loginToken
+    }
+  })
+}
+
+$('body').on('click', '.star', async function (e) {
+  e.target.className = ('clicked');
+  await addFavorite(currentUser.username,e.target.parentElement.id);
+  await checkForRememberedUser();
+})
+
+$('body').on('click', '.clicked', async function (e) {
+  e.target.className = ('star');
+  await deleteFavorite(currentUser.username,e.target.parentElement.id);
+  await checkForRememberedUser();
+  putFavoritesOnFaveList();
+})
+
+function putFavoritesOnFaveList() {
+  if (currentUser.favorites.length > 0) {
+    console.debug("putFavoritesOnFaveList");
+
+    $faveStories.empty();
+
+    for(let fave of currentUser.favorites){
+      const $fave = generateStoryMarkup(fave);
+      $faveStories.append($fave);
+    }
+  }
+  else {
+    $faveStories.empty();
+    $faveStories.append("No favorites added!")
+  }
+}
+
+function putMyStoriesOnList() {
+  if (currentUser.ownStories.length > 0) {
+    console.debug("putMyStoriesOnList");
+
+    $myStoriesList.empty();
+
+    for(let story of currentUser.ownStories){
+      const $story = generateStoryMarkup(story);
+      $story.prepend(
+        '<span class="trash"></span>'
+      )
+      $myStoriesList.append($story);
+    }
+  }
+  else {
+    $myStoriesList.empty();
+    $myStoriesList.append("No stories added!")
+  }
+}
+
+async function deleteStory(storyId) {
+  console.debug("deleteStory");
+
+  const response = await axios({
+    url: `${BASE_URL}/stories/${storyId}`,
+    method: "DELETE",
+    data: {
+      'token' : currentUser.loginToken
+    }
+  })
+  await checkForRememberedUser();
+}
+
+$('body').on('click', '.trash', async function(e){
+  await deleteStory(e.target.parentElement.id);
+  putMyStoriesOnList();
+})

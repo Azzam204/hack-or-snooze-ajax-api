@@ -3,6 +3,9 @@
 body {
   font-family: Arimo, sans-serif;
   margin: 8px 7.5vw;
+  height: 100vh;
+  background: radial-gradient(#da9ecd, #97bbe8);
+  background-size: cover;
 }
 
 h1 {
@@ -115,6 +118,36 @@ form > hr {
 
 .login-input label {
   width: 70px;
+}
+
+.star::before {
+  content: "\f005";
+  font-family: "Font Awesome 5 Free";
+  font-size: 0.75rem;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+.clicked::before {
+  font-weight: 900;
+  content: "\f005";
+  font-family: "Font Awesome 5 Free";
+  font-size: 0.75rem;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+.trash::before {
+  font-weight: 900;
+  content: "\f2ed";
+  font-family: "Font Awesome 5 Free";
+  font-size: 0.75rem;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+.trash:hover {
+  color: red;
 }
 
 

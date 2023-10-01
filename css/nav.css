@@ -4,7 +4,7 @@ nav {
   display: flex;
   background-color: #ff6600;
   align-items: center;
-  padding: 5px 20px;
+  padding: 20px;
   border-radius: 3px 3px 0 0;
 }
 
@@ -20,4 +20,9 @@ nav {
 .nav-right {
   margin-left: auto;
   text-align: right;
+}
+
+#nav-left{
+  margin-left: 10px;
+  margin-right: 10px;
 }
