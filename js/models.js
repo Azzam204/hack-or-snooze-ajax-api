@@ -23,11 +23,13 @@ class Story {
 
   /** Parses hostname out of URL and returns it. */
 
+  // student code- this function parses hostname out of URL and returns the hostname
   getHostName() {
     // UNIMPLEMENTED: complete this function!
     const hostname = new URL(this.url)
     return hostname.hostname;
   }
+  // end of student code
 }
 
 
@@ -74,6 +76,7 @@ class StoryList {
    * Returns the new Story instance
    */
 
+  // student code - this function creates a new instance of Story, posts the story to the API, and refreshes the currentUser variables and story list
   async addStory( user, newStory ) {
     const story = new Story({
       author : newStory.author,
@@ -92,6 +95,7 @@ class StoryList {
      return story ;
     // UNIMPLEMENTED: complete this function!
   }
+  // end of student code
 }
 
 

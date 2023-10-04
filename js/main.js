@@ -13,6 +13,8 @@ const $signupForm = $("#signup-form");
 const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
+
+// student code -  created variables for; nav links, submit form, favorites list, and my stories list.
 const $submitLink = $("#submit-link");
 const $storyForm = $("#story-form");
 const $storySubmit = $("#story-submit");
@@ -21,7 +23,7 @@ const $navLeft = $("#nav-left");
 const $faveStories = $("#favorite-stories-list");
 const $myStoriesLink = $("#my-stories-link");
 const $myStoriesList = $("#my-stories-list");
-
+// end of student code
 
 /** To make it easier for individual components to show just themselves, this
  * is a useful function that hides pretty much everything on the page. After

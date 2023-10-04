@@ -35,6 +35,7 @@ function updateNavOnLogin() {
   $navUserProfile.text(`${currentUser.username}`).show();
 }
 
+// student code - the following 3 functions and event listeners are for the functionality of the 3 new nav bar tabs. submit, favorites, my stories
 function navSubmitClick(evt) {
   console.debug("navSubmitClick",evt);
   hidePageComponents();
@@ -61,4 +62,6 @@ function navMyStories(evt) {
   $myStoriesList.show();
 }
 
-$myStoriesLink.on("click",navMyStories)
+$myStoriesLink.on("click",navMyStories);
+
+// end of student code

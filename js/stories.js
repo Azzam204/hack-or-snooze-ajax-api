@@ -19,6 +19,7 @@ async function getAndShowStoriesOnStart() {
  * Returns the markup for the story.
  */
 
+// student code -  adjusted this function to generate a markup that includes star icon for favorited stories, trash icon for my stories stories, and no icon when a user is not logged in
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
@@ -62,6 +63,7 @@ function generateStoryMarkup(story) {
   </li>
 `);
 }
+// end of student code
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
@@ -79,6 +81,7 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
+// student code - this function and event listener adds a new story on submit by taking the values from the submit form and updates currentuser variable to contain new story
 async function addNewStory(e) {
   console.debug("addNewStory",e);
   e.preventDefault();
@@ -96,7 +99,9 @@ async function addNewStory(e) {
 }
 
 $storyForm.on("submit",addNewStory);
+// end of student code
 
+// student code -  the following 2 functions send favorite stories to api to be stored, and delete favorited stories from api when called with username and story id
 async function addFavorite ( username, storyid) {
   console.debug("addFavorite");
 
@@ -120,7 +125,9 @@ async function deleteFavorite ( username, storyid) {
     }
   })
 }
+// end of student code
 
+// student code - the following event listeners call the add and delete favorite functions when star is clicked or un clicked. they also change the classes of the stars aswell
 $('body').on('click', '.star', async function (e) {
   e.target.className = ('clicked');
   await addFavorite(currentUser.username,e.target.parentElement.id);
@@ -133,7 +140,9 @@ $('body').on('click', '.clicked', async function (e) {
   await checkForRememberedUser();
   putFavoritesOnFaveList();
 })
+// end of student code
 
+// student code - the following functions display favorites and my stories list
 function putFavoritesOnFaveList() {
   if (currentUser.favorites.length > 0) {
     console.debug("putFavoritesOnFaveList");
@@ -170,6 +179,7 @@ function putMyStoriesOnList() {
     $myStoriesList.append("No stories added!")
   }
 }
+// end student code
 
 async function deleteStory(storyId) {
   console.debug("deleteStory");

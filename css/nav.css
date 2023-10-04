@@ -22,7 +22,9 @@ nav {
   text-align: right;
 }
 
+/* student code - created css for nav tabs; submit, favorites, and my stories */
 #nav-left{
   margin-left: 10px;
   margin-right: 10px;
 }
+/* end of student code */

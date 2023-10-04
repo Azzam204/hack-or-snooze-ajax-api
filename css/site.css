@@ -120,6 +120,7 @@ form > hr {
   width: 70px;
 }
 
+/* student code -  created css for favorites star, click functionality, and my stories trash icon */
 .star::before {
   content: "\f005";
   font-family: "Font Awesome 5 Free";
@@ -149,7 +150,7 @@ form > hr {
 .trash:hover {
   color: red;
 }
-
+/* end of student code */
 
 /* responsive queries for tightening things up for mobile. */
 
